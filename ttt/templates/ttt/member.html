@@ -1,0 +1,41 @@
+{% extends 'ttt/base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+
+<link rel="stylesheet" href=" {% static 'css/task_list.css' %}" >
+
+
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Member ID </th>
+				<th>Full Name</th>
+				<th>Task Assigned</th>
+				<th>Task ID </th>
+				<th>Task Status</th>
+				<th>Last Updated</th>
+				<th>View Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for t in task_details %}
+				<tr>
+					<td>{{t.member.id}}</td>
+					<td>{{t.member.name}}</td>
+					<td>{{t.task.name}}</td>
+					<td>{{t.task.id}}</td>
+					<td>{{t.task_status}}</td>
+					<td>{{t.date_created}}</td>
+					<td><a href = "{% url 'view_task' t.task.id %}">View</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+
+{% endblock %}
