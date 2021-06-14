@@ -1,0 +1,17 @@
+{% extends 'ttt/base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+<form action="" method="POST">
+{% csrf_token%}
+
+<p>Updating the task {{ task_name }} assigned to  {{ member_name }}</p>
+
+{{ form }}
+
+<input type="submit" name="Submit"></input>
+</form>
+
+{% endblock %}

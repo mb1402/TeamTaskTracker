@@ -1,0 +1,40 @@
+{% extends 'ttt/base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+
+<link rel="stylesheet" href=" {% static 'css/task_list.css' %}" >
+
+
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Task ID </th>
+				<th>Name of the Task</th>
+				<th>Category</th>
+				<th>Description</th>
+				<th>Created On</th>
+				<td>Update</td>
+				<td>Delete</td>
+				<th>Assigned To</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr>
+					<td>{{ tasks.id }}</td>
+					<td>{{ tasks.name }}</td>
+					<td>{{ tasks.category }}</td>
+					<td>{{ tasks.description }}</td>
+					<td>{{ tasks.date_created }}</td>
+					<td><a href="{% url 'update_task' tasks.id %}">Update</a></td>
+					<td><a href="{% url 'delete_task' tasks.id %}">Delete</a></td>
+					<td>{{ tasks.member.name }}</td>
+				</tr>
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

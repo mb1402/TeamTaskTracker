@@ -1,0 +1,21 @@
+{% extends 'ttt/base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+
+
+
+<form action = "#"  method="POST">
+{% csrf_token%}
+
+Are you sure you want to delete the {{ task_details }}?
+<br>
+
+<input type="submit" name="Confirm"></input>
+<a href="{% url 'home' %}" >Cancel</a>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'ttt/base.html' %}
+
+
+{% load static %}
+
+{% block content%}
+
+<link rel="stylesheet" href=" {% static 'css/dashboard.css' %}" >
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+<body>
+  <main class="container">
+    <section class="right">Tasks - In Progress<br>{{ task_pending_count }}</section>
+    <section class="center">Tasks - Completed<br>{{ tasks_completed }}</section>
+    <section class="left">Total Tasks<br>{{ total_tasks }}</section>
+  </main>
+
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Assigned To</th>
+            <th>Assigned On</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>View Task Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in task_details %}
+            <tr>
+                <td>{{ t.task.name }}</td>
+                <td>{{ t.member.name }}</td>
+                <td>{{ t.date_created }}</td>
+                <td>{{ t.task.task_status }}</td>
+                <td>{{ t.task.category }}</td>
+                <td><a href="{% url 'view_task' t.task.id %}">View</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+</body>
+
+
+
+{% endblock %}

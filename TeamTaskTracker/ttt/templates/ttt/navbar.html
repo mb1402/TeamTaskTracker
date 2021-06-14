@@ -1,0 +1,67 @@
+{% load static %}
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width device-width, initial-scale=1.0">
+<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href=" {% static 'css/navbar.css' %}" >
+
+
+<title>Dashboard</title>
+
+<style>
+	.user-msg{
+		font-size: 14px;
+		color: #fff;
+		margin-top: 4px;
+		margin-left: 4px;
+		padding: 2px 6px;
+		font-weight: bold;
+	}
+
+
+
+</style>
+
+
+</head>
+<body>
+<nav class="navbar">
+<!-- 	<span class="user-msg">Hi,{{ request.user | title }}</span> -->
+	<ul class="navbar-nav" >
+		{% if request.user.is_staff %}
+		<li><a href="{% url 'home' %}">Dashboard</a></li>
+<!-- 		<li><a href="{% url 'members' %}">Member</a></li> -->
+		<li><a href="{% url 'tasks' %}">Tasks</a></li>
+		<li><a href="{% url 'create_task' %}">Create Task</a></li>
+		<li><a href="{% url 'allocate_task' %}">Allocate</a></li>
+		{% endif %}
+		<li><a href="{% url 'logout' %}">Log Out</a></li>
+
+	</ul>
+
+
+	<span class="hello-msg">Hi,{{ request.user | title }}</span>
+</nav>
+
+<div id="main">
+</div>
+
+<script>
+	function openSlideMenu(){
+		document.getElementById('side-menu').style.width='250px';
+		document.getElementById('main').style.marginLeft='250px';
+	}
+	function closeSlidemenu(){
+		document.getElementById('side-menu').style.width='0px';
+		document.getElementById('main').style.marginLeft='0px';
+
+	}
+
+</script>	
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script> -->
+
+
+</body>
+</html>
