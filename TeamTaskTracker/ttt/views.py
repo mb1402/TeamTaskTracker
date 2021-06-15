@@ -208,30 +208,39 @@ def create_task(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
-def allocate_task(request):
-	try:
-		unallocated_tasks = Task.objects.get(member__isnull=True)
-		task_id=unallocated_tasks.id
-	except Task.DoesNotExist:
-		unallocated_tasks = None
+def allocate_task(request, pk):
 
-	if unallocated_tasks == None:
-		return redirect('error')
-	else:
-		form = TaskAllocateForm(instance=unallocated_tasks)
+	task_details = Task.objects.get(id=pk)
+	unallocated_tasks = Allocation.objects.filter(member__isnull=True)
+	print(unallocated_tasks)
+	for u in unallocated_tasks:
+		print('value', task_details.allocation__set.add(u))
+	form = TaskAllocateForm(instance=task_details)
+	if request.method == 'POST':
+		form = TaskAllocateForm(request.POST, instance=task_details)
+		if form.is_valid():
+			form.save()
+			return redirect('/')
+	# try:
+	# 	unallocated_tasks = Task.objects.filter(member__isnull=True)
+	# except Task.DoesNotExist:
+	# 	unallocated_tasks = None
 
-		if request.method == 'POST':
-			form = TaskAllocateForm(request.POST, instance=unallocated_tasks)
-			if form.is_valid():
-				form.save()
-				return redirect('/')
+	# if unallocated_tasks == None:
+	# 	return redirect('error')
+	# else:
+	# 	form = TaskAllocateForm(instance=unallocated_tasks)
+
+	# 	if request.method == 'POST':
+	# 		form = TaskAllocateForm(request.POST, instance=unallocated_tasks)
+	# 		if form.is_valid():
+	# 			form.save()
+	# 			return redirect('/')
 
 
 	context = {
-	'form':form,
-	'task_id':task_id
-	}
+		'form':form,
+		}
 
 
 	return render(request, 'ttt/allocate_task.html', context)

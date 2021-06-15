@@ -29,7 +29,7 @@ class CreateUserForm(UserCreationForm):
 class TaskAllocateForm(ModelForm):
 	class Meta:
 		model = Task 
-		fields = '__all__'
+		fields = ['name', 'member', 'task_status']
 
 
 

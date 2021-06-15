@@ -54,7 +54,7 @@ class Task(models.Model):
 class Allocation(models.Model):
 	
 	member = models.ForeignKey('Member', null=True, on_delete=models.CASCADE)
-	task = models.OneToOneField('Task', null=True, on_delete=models.CASCADE)
+	task = models.ForeignKey('Task', null=True, on_delete=models.CASCADE)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	
 

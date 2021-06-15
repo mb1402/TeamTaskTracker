@@ -35,14 +35,14 @@
         </tr>
     </thead>
     <tbody>
-        {% for t in task_details %}
+        {% for t in tasks %}
             <tr>
-                <td>{{ t.task.name }}</td>
+                <td>{{ t.name }}</td>
                 <td>{{ t.member.name }}</td>
                 <td>{{ t.date_created }}</td>
-                <td>{{ t.task.task_status }}</td>
-                <td>{{ t.task.category }}</td>
-                <td><a href="{% url 'view_task' t.task.id %}">View</a></td>
+                <td>{{ t.task_status }}</td>
+                <td>{{ t.category }}</td>
+                <td><a href="{% url 'view_task' t.id %}">View</a></td>
             </tr>
         {% endfor %}
     </tbody>
