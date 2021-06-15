@@ -211,10 +211,6 @@ def create_task(request):
 def allocate_task(request, pk):
 
 	task_details = Task.objects.get(id=pk)
-	unallocated_tasks = Allocation.objects.filter(member__isnull=True)
-	print(unallocated_tasks)
-	for u in unallocated_tasks:
-		print('value', task_details.allocation__set.add(u))
 	form = TaskAllocateForm(instance=task_details)
 	if request.method == 'POST':
 		form = TaskAllocateForm(request.POST, instance=task_details)
